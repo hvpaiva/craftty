@@ -15,3 +15,5 @@ updates:
     commit-message:
       prefix: "ci"
       include: "scope"
+    ignore:
+      - dependency-name: "dtolnay/rust-toolchain"
