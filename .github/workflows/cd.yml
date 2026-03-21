@@ -55,26 +55,41 @@ jobs:
           git config user.email "craftty-bot@users.noreply.github.com"
 
       - name: Bump version
+        id: bump
         env:
           PACKAGE: ${{ inputs.package }}
         run: |
+          tags_before=$(git tag --list | sort)
           if [ "$PACKAGE" = "all" ]; then
             cog bump --auto
           else
             cog bump --auto --package "$PACKAGE"
           fi
+          tags_after=$(git tag --list | sort)
+          new_tags=$(comm -13 <(echo "$tags_before") <(echo "$tags_after"))
+          if [ -z "$new_tags" ]; then
+            echo "::error::No version bump was produced. Nothing to publish."
+            exit 1
+          fi
+          echo "New tags: $new_tags"
+          echo "$new_tags" | grep -q "^craftty-ink-v" && echo "ink=true" >> "$GITHUB_OUTPUT" || echo "ink=false" >> "$GITHUB_OUTPUT"
+          echo "$new_tags" | grep -q "^craftty-v" && echo "craftty=true" >> "$GITHUB_OUTPUT" || echo "craftty=false" >> "$GITHUB_OUTPUT"
 
       - name: Push commit and tag
         run: git push --follow-tags
 
       - name: Publish craftty-ink
-        if: inputs.package == 'all' || inputs.package == 'craftty-ink'
+        if: steps.bump.outputs.ink == 'true'
         run: cargo publish -p craftty-ink
         env:
           CARGO_REGISTRY_TOKEN: ${{ secrets.CARGO_REGISTRY_TOKEN }}
 
+      - name: Wait for crates.io index
+        if: steps.bump.outputs.ink == 'true' && steps.bump.outputs.craftty == 'true'
+        run: sleep 30
+
       - name: Publish craftty
-        if: inputs.package == 'all' || inputs.package == 'craftty'
+        if: steps.bump.outputs.craftty == 'true'
         run: cargo publish -p craftty
         env:
           CARGO_REGISTRY_TOKEN: ${{ secrets.CARGO_REGISTRY_TOKEN }}
