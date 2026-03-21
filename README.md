@@ -10,10 +10,10 @@ A modular terminal toolkit for Rust.
 
 ## Crates
 
-| Crate | Description | Version |
-|-------|-------------|---------|
-| [craftty-ink](crates/craftty-ink) | Declarative terminal styling library | [![Crates.io](https://img.shields.io/crates/v/craftty-ink.svg)](https://crates.io/crates/craftty-ink) |
-| [craftty](crates/craftty) | CLI toolkit | [![Crates.io](https://img.shields.io/crates/v/craftty.svg)](https://crates.io/crates/craftty) |
+| Crate | Description | Version | Docs |
+|-------|-------------|---------|------|
+| [craftty-ink](crates/craftty-ink) | Declarative terminal styling library | [![Crates.io](https://img.shields.io/crates/v/craftty-ink.svg)](https://crates.io/crates/craftty-ink) | [![docs.rs](https://docs.rs/craftty-ink/badge.svg)](https://docs.rs/craftty-ink) |
+| [craftty](crates/craftty) | CLI toolkit | [![Crates.io](https://img.shields.io/crates/v/craftty.svg)](https://crates.io/crates/craftty) | [![docs.rs](https://docs.rs/craftty/badge.svg)](https://docs.rs/craftty) |
 
 ## Development
 
