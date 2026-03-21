@@ -53,7 +53,7 @@ jobs:
         run: cargo deny check
 
       - name: Install cocogitto
-        uses: cocogitto/cocogitto-action@v3
+        uses: cocogitto/cocogitto-action@v4
 
       - name: Validate commits
         run: cog check
