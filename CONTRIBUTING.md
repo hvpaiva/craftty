@@ -61,7 +61,7 @@ type(scope): description
 
 **Types:** `feat`, `fix`, `docs`, `style`, `refactor`, `perf`, `test`, `build`, `ci`, `chore`, `revert`
 
-**Scopes:** `craftty-ink`, `craftty` (optional, but only these are accepted)
+**Scopes:** `craftty-ink`, `craftty`, `deps` (optional, but only these are accepted)
 
 **Examples:**
 

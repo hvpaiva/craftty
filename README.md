@@ -29,6 +29,9 @@ just fmt
 just lint
 just test
 
+# Run the craftty CLI
+just run
+
 # Generate coverage report
 just coverage
 ```

@@ -63,6 +63,6 @@ if [ -n "$blocked" ]; then
     echo "  - $line"
   done
   echo ""
-  echo "If you really need to bypass this, use: git commit --no-verify"
+  echo "If you really need to bypass this, use: SKIP_RELEASE_GUARD=1 git commit ..."
   exit 1
 fi
