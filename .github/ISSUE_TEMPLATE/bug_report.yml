@@ -17,7 +17,7 @@ body:
       description: Minimal code or steps to reproduce the behavior.
       placeholder: |
         ```rust
-        use style::Style;
+        use craftty_ink::Style;
         // ...
         ```
     validations:
@@ -36,6 +36,17 @@ body:
     attributes:
       label: Actual Behavior
       description: What actually happened.
+    validations:
+      required: true
+
+  - type: dropdown
+    id: crate
+    attributes:
+      label: Crate
+      description: Which crate is affected?
+      options:
+        - craftty-ink
+        - craftty
     validations:
       required: true
 

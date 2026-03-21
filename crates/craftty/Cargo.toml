@@ -1,0 +1,15 @@
+[package]
+name = "craftty"
+version = "0.1.0"
+description = "A terminal toolkit CLI"
+readme = "README.md"
+keywords = ["terminal", "cli", "toolkit"]
+categories = ["command-line-interface"]
+edition.workspace = true
+rust-version.workspace = true
+authors.workspace = true
+license.workspace = true
+repository.workspace = true
+
+[dependencies]
+craftty-ink = { workspace = true }

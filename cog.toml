@@ -6,17 +6,17 @@ tag_prefix = "v"
 branch_whitelist = ["main"]
 skip_ci = "[skip ci]"
 skip_untracked = false
+scopes = ["craftty-ink", "craftty", "deps"]
+generate_mono_repository_global_tag = true
+generate_mono_repository_package_tags = true
 
 pre_bump_hooks = [
-    "cargo fmt --check",
-    "cargo clippy -- -D warnings",
-    "cargo nextest run",
+    "cargo fmt --all --check",
+    "cargo clippy --workspace -- -D warnings",
+    "cargo nextest run --workspace",
 ]
 
-post_bump_hooks = [
-    "git push",
-    "git push origin {{version_tag}}",
-]
+post_bump_hooks = []
 
 [git_hooks.commit-msg]
 path = "hooks/commit-msg.sh"
@@ -31,7 +31,20 @@ path = "CHANGELOG.md"
 template = "remote"
 remote = "github.com"
 owner = "hvpaiva"
-repository = "style"
+repository = "craftty"
 authors = []
 
 [bump_profiles]
+
+[monorepo]
+resolver = "Cargo"
+
+[monorepo.packages.craftty-ink]
+path = "crates/craftty-ink"
+changelog_path = "crates/craftty-ink/CHANGELOG.md"
+public_api = true
+
+[monorepo.packages.craftty]
+path = "crates/craftty"
+changelog_path = "crates/craftty/CHANGELOG.md"
+public_api = true

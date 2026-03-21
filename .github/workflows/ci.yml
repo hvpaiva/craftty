@@ -28,16 +28,16 @@ jobs:
       - uses: Swatinem/rust-cache@v2
 
       - name: Format
-        run: cargo fmt --check
+        run: cargo fmt --all --check
 
       - name: Clippy
-        run: cargo clippy -- -D warnings
+        run: cargo clippy --workspace -- -D warnings
 
       - name: Install nextest and llvm-cov
         uses: taiki-e/install-action@cargo-llvm-cov+nextest
 
       - name: Test with coverage
-        run: cargo llvm-cov nextest --lcov --output-path lcov.info --fail-under-lines 90
+        run: cargo llvm-cov nextest --workspace --lcov --output-path lcov.info --fail-under-lines 90
 
       - name: Upload coverage
         if: github.event_name == 'push' && github.ref == 'refs/heads/main'
@@ -59,9 +59,24 @@ jobs:
         run: cog check
 
       - name: Docs
-        run: cargo doc --no-deps
+        run: cargo doc --workspace --no-deps
         env:
           RUSTDOCFLAGS: "-D warnings"
+
+  guard-release-files:
+    name: Guard release files
+    if: github.event_name == 'pull_request'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Check for manual changelog or version edits
+        env:
+          BASE_REF: ${{ github.base_ref }}
+          SKIP_RELEASE_GUARD: ${{ contains(github.event.pull_request.labels.*.name, 'release-override') && '1' || '' }}
+        run: ./scripts/guard-release-files.sh --pr "$BASE_REF"
 
   msrv:
     name: MSRV (1.85)
@@ -74,7 +89,7 @@ jobs:
       - uses: Swatinem/rust-cache@v2
 
       - name: Build
-        run: cargo build
+        run: cargo build --workspace
 
       - name: Test
-        run: cargo test
+        run: cargo test --workspace

@@ -1,22 +1,19 @@
-# Style
+# Craftty
 
-[![CI](https://github.com/hvpaiva/style/actions/workflows/ci.yml/badge.svg)](https://github.com/hvpaiva/style/actions/workflows/ci.yml)
-[![codecov](https://codecov.io/gh/hvpaiva/style/branch/main/graph/badge.svg)](https://codecov.io/gh/hvpaiva/style)
-[![Crates.io](https://img.shields.io/crates/v/style.svg)](https://crates.io/crates/style)
-[![docs.rs](https://docs.rs/style/badge.svg)](https://docs.rs/style)
+[![CI](https://github.com/hvpaiva/craftty/actions/workflows/ci.yml/badge.svg)](https://github.com/hvpaiva/craftty/actions/workflows/ci.yml)
+[![codecov](https://codecov.io/gh/hvpaiva/craftty/branch/main/graph/badge.svg)](https://codecov.io/gh/hvpaiva/craftty)
 [![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 
-A declarative terminal styling library for Rust.
+A modular terminal toolkit for Rust.
 
-> **Status**: Early development (MVP)
+> **Status**: Early development
 
-## Features (planned)
+## Crates
 
-- Composable style builder with fluent API
-- Text formatting (bold, italic, underline, strikethrough, dim, reverse)
-- Color support (ANSI, ANSI256, TrueColor) with automatic degradation
-- Horizontal padding and margin
-- Style inheritance and composition
+| Crate | Description | Version |
+|-------|-------------|---------|
+| [craftty-ink](crates/craftty-ink) | Declarative terminal styling library | [![Crates.io](https://img.shields.io/crates/v/craftty-ink.svg)](https://crates.io/crates/craftty-ink) |
+| [craftty](crates/craftty) | CLI toolkit | [![Crates.io](https://img.shields.io/crates/v/craftty.svg)](https://crates.io/crates/craftty) |
 
 ## Development
 
@@ -44,4 +41,4 @@ See [CONTRIBUTING.md](CONTRIBUTING.md) for details.
 
 ## Acknowledgments
 
-Inspired by [Lip Gloss](https://github.com/charmbracelet/lipgloss).
+Inspired by [Lip Gloss](https://github.com/charmbracelet/lipgloss) and the [Charm](https://charm.sh) ecosystem.

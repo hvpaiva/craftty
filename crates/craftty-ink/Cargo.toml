@@ -1,0 +1,22 @@
+[package]
+name = "craftty-ink"
+version = "0.1.0"
+description = "A declarative terminal styling library"
+readme = "README.md"
+keywords = ["terminal", "styling", "ansi", "colors", "cli"]
+categories = ["command-line-interface"]
+edition.workspace = true
+rust-version.workspace = true
+authors.workspace = true
+license.workspace = true
+repository.workspace = true
+
+[package.metadata.docs.rs]
+all-features = true
+rustdoc-args = ["--cfg", "docsrs"]
+
+[dependencies]
+owo-colors = { workspace = true }
+terminal_size = { workspace = true }
+textwrap = { workspace = true }
+unicode-width = { workspace = true }

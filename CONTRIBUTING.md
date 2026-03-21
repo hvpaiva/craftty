@@ -24,9 +24,32 @@ This installs all required tools (cocogitto, cargo-deny, cargo-nextest, just) an
 
 Keep PRs focused and small when possible. Separate refactoring from functional changes.
 
+## Project Structure
+
+This is a Cargo workspace monorepo. All crates live under `crates/`:
+
+```
+crates/
+├── craftty-ink/   # Declarative terminal styling library (core)
+├── craftty/       # CLI toolkit (the only binary crate)
+└── ...            # Future crates (all libraries)
+```
+
+Each crate has its own `README.md` and `CHANGELOG.md`. Workspace-level metadata (edition, authors, license) is shared via `Cargo.toml` at the root.
+
 ## Conventional Commits
 
 This project enforces [Conventional Commits](https://www.conventionalcommits.org/) via git hooks.
+
+You can use `cog commit` (installed by `just setup`) for an interactive guide through the format:
+
+```bash
+cog commit feat "add color degradation support" craftty-ink
+```
+
+Or use `git commit` directly — the commit-msg hook validates the format either way.
+
+Format:
 
 ```
 type(scope): description
@@ -38,13 +61,25 @@ type(scope): description
 
 **Types:** `feat`, `fix`, `docs`, `style`, `refactor`, `perf`, `test`, `build`, `ci`, `chore`, `revert`
 
+**Scopes:** `craftty-ink`, `craftty` (optional, but only these are accepted)
+
 **Examples:**
 
 ```
-feat: add color degradation support
-fix(render): handle empty string input
+feat(craftty-ink): add color degradation support
+fix(craftty): handle missing terminal width
 docs: update README with usage examples
+chore: update CI workflow
 ```
+
+## Automated Versioning
+
+Versions and changelogs are managed automatically by [cocogitto](https://docs.cocogitto.io/) via the CD pipeline. **Do not** edit `CHANGELOG.md` files or `version` fields in `Cargo.toml` manually — they will be overwritten on the next release.
+
+A pre-commit hook and a CI check enforce this. If you have a legitimate reason to edit these files (e.g. structural changes, migrations):
+
+1. **Locally:** `SKIP_RELEASE_GUARD=1 git commit ...`
+2. **CI:** add the `release-override` label to the PR
 
 ## Development
 
@@ -54,6 +89,8 @@ just fmt        # format code
 just lint       # clippy
 just test       # tests
 just audit      # dependency audit
+just run        # run the craftty CLI
+just hooks      # install/update git hooks
 ```
 
 ## Code Style
@@ -65,4 +102,4 @@ just audit      # dependency audit
 
 ## Reporting Issues
 
-Before opening an issue, check if a similar one already exists. Include reproduction steps when reporting bugs.
+Before opening an issue, check if a similar one already exists. Include reproduction steps and the affected crate when reporting bugs.

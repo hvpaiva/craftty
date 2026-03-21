@@ -2,6 +2,17 @@ name: Feature Request
 description: Suggest a new feature
 labels: ["enhancement"]
 body:
+  - type: dropdown
+    id: crate
+    attributes:
+      label: Crate
+      description: Which crate is this feature for?
+      options:
+        - craftty-ink
+        - craftty
+    validations:
+      required: true
+
   - type: textarea
     id: description
     attributes:

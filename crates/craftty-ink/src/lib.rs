@@ -1,9 +1,9 @@
-//! A declarative terminal styling library for Rust.
+//! A declarative terminal styling library.
 
 #![forbid(unsafe_code)]
 #![warn(missing_docs)]
 
-/// Placeholder to be replaced with actual implementation.
+/// Returns the crate version.
 pub fn version() -> &'static str {
     env!("CARGO_PKG_VERSION")
 }

@@ -9,6 +9,23 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "843867be96c8daad0d758b57df9392b6d8d271134fce549de6ce169ff98a92af"
 
 [[package]]
+name = "craftty"
+version = "0.1.0"
+dependencies = [
+ "craftty-ink",
+]
+
+[[package]]
+name = "craftty-ink"
+version = "0.1.0"
+dependencies = [
+ "owo-colors",
+ "terminal_size",
+ "textwrap",
+ "unicode-width",
+]
+
+[[package]]
 name = "errno"
 version = "0.3.14"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -81,16 +98,6 @@ name = "smawk"
 version = "0.3.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "b7c388c1b5e93756d0c740965c41e8822f866621d41acbdf6336a6a168f8840c"
-
-[[package]]
-name = "style"
-version = "0.1.0"
-dependencies = [
- "owo-colors",
- "terminal_size",
- "textwrap",
- "unicode-width",
-]
 
 [[package]]
 name = "supports-color"

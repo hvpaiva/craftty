@@ -2,13 +2,22 @@ name: CD
 
 on:
   workflow_dispatch:
+    inputs:
+      package:
+        description: "Package to release"
+        required: true
+        type: choice
+        options:
+          - all
+          - craftty-ink
+          - craftty
 
 env:
   CARGO_TERM_COLOR: always
 
 jobs:
   release:
-    name: CD
+    name: Release ${{ inputs.package }}
     runs-on: ubuntu-latest
     permissions:
       contents: write
@@ -29,24 +38,38 @@ jobs:
 
       - name: Check
         run: |
-          cargo fmt --check
-          cargo clippy -- -D warnings
-          cargo nextest run
+          cargo fmt --all --check
+          cargo clippy --workspace -- -D warnings
+          cargo nextest run --workspace
 
       - uses: cocogitto/cocogitto-action@v3
 
       - name: Configure git
         run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git config user.name "craftty-bot"
+          git config user.email "craftty-bot@users.noreply.github.com"
 
       - name: Bump version
-        run: cog bump --auto
+        env:
+          PACKAGE: ${{ inputs.package }}
+        run: |
+          if [ "$PACKAGE" = "all" ]; then
+            cog bump --auto
+          else
+            cog bump --auto --package "$PACKAGE"
+          fi
 
       - name: Push commit and tag
         run: git push --follow-tags
 
-      - name: Publish to crates.io
-        run: cargo publish
+      - name: Publish craftty-ink
+        if: inputs.package == 'all' || inputs.package == 'craftty-ink'
+        run: cargo publish -p craftty-ink
+        env:
+          CARGO_REGISTRY_TOKEN: ${{ secrets.CARGO_REGISTRY_TOKEN }}
+
+      - name: Publish craftty
+        if: inputs.package == 'all' || inputs.package == 'craftty'
+        run: cargo publish -p craftty
         env:
           CARGO_REGISTRY_TOKEN: ${{ secrets.CARGO_REGISTRY_TOKEN }}

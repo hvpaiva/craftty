@@ -8,6 +8,7 @@ If you discover a security vulnerability in this project, please report it respo
 
 Instead, send an email to [contact@hvpaiva.dev](mailto:contact@hvpaiva.dev) with:
 
+- Which crate is affected (e.g. `craftty-ink`, `craftty`)
 - A description of the vulnerability
 - Steps to reproduce
 - Potential impact
