@@ -1,0 +1,22 @@
+[package]
+name = "style"
+version = "0.1.0"
+edition = "2024"
+rust-version = "1.85"
+authors = ["Highlander Paiva <contact@hvpaiva.dev>"]
+description = "A declarative terminal styling library for Rust"
+license = "MIT"
+repository = "https://github.com/hvpaiva/style"
+readme = "README.md"
+keywords = ["terminal", "styling", "ansi", "colors", "cli"]
+categories = ["command-line-interface"]
+
+[package.metadata.docs.rs]
+all-features = true
+rustdoc-args = ["--cfg", "docsrs"]
+
+[dependencies]
+owo-colors = { version = "4.3.0", features = ["supports-colors"] }
+terminal_size = "0.4.3"
+textwrap = "0.16.2"
+unicode-width = "0.2.2"

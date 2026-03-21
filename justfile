@@ -1,0 +1,39 @@
+# Run all checks
+check: fmt-check lint test audit
+
+# Format code
+fmt:
+    cargo fmt
+
+# Verify formatting
+fmt-check:
+    cargo fmt --check
+
+# Lint with clippy
+lint:
+    cargo clippy -- -D warnings
+
+# Run tests
+test:
+    cargo nextest run
+
+# Audit dependencies
+audit:
+    cargo deny check
+
+# Generate coverage report
+coverage:
+    cargo llvm-cov --html
+    @echo "Report at target/llvm-cov/html/index.html"
+
+# Generate coverage summary
+coverage-summary:
+    cargo llvm-cov --fail-under-lines 90
+
+# Generate and open docs
+doc:
+    cargo doc --no-deps --open
+
+# Setup development environment
+setup:
+    ./scripts/setup.sh
