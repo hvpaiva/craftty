@@ -6,7 +6,7 @@ tag_prefix = "v"
 branch_whitelist = ["main"]
 skip_ci = "[skip ci]"
 skip_untracked = false
-scopes = ["craftty-ink", "craftty", "deps"]
+scopes = ["craftty-ink", "craftty", "deps", "version"]
 generate_mono_repository_global_tag = true
 generate_mono_repository_package_tags = true
 
