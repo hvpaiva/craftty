@@ -34,6 +34,10 @@ coverage-summary:
 doc:
     cargo doc --no-deps --open
 
+# Install/update git hooks
+hooks:
+    cog install-hook --all --overwrite
+
 # Setup development environment
 setup:
     ./scripts/setup.sh
