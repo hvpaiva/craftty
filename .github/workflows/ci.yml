@@ -58,10 +58,13 @@ jobs:
       - name: Audit
         run: cargo deny check
 
-      - name: Validate commits
-        uses: cocogitto/cocogitto-action@v4
+      - name: Install cocogitto
+        uses: taiki-e/install-action@v2
         with:
-          command: check
+          tool: cocogitto@7
+
+      - name: Validate commits
+        run: cog check
 
       - name: Docs
         run: cargo doc --workspace --no-deps
