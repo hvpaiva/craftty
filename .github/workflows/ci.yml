@@ -58,11 +58,10 @@ jobs:
       - name: Audit
         run: cargo deny check
 
-      - name: Install cocogitto
-        uses: cocogitto/cocogitto-action@v4
-
       - name: Validate commits
-        run: cog check
+        uses: cocogitto/cocogitto-action@v4
+        with:
+          command: check
 
       - name: Docs
         run: cargo doc --workspace --no-deps

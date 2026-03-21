@@ -44,22 +44,13 @@ jobs:
           cargo clippy --workspace -- -D warnings
           cargo nextest run --workspace
 
-      - uses: cocogitto/cocogitto-action@v4
-
-      - name: Configure git
-        run: |
-          git config user.name "craftty-bot"
-          git config user.email "craftty-bot@users.noreply.github.com"
-
       - name: Bump version
-        env:
-          PACKAGE: ${{ inputs.package }}
-        run: |
-          if [ "$PACKAGE" = "all" ]; then
-            cog bump --auto
-          else
-            cog bump --auto --package "$PACKAGE"
-          fi
+        uses: cocogitto/cocogitto-action@v4
+        with:
+          command: bump
+          args: --auto ${{ inputs.package != 'all' && format('--package {0}', inputs.package) || '' }}
+          git-user: craftty-bot
+          git-user-email: craftty-bot@users.noreply.github.com
 
       - name: Push commit and tag
         run: git push --follow-tags
