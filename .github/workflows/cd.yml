@@ -22,7 +22,7 @@ jobs:
     permissions:
       contents: write
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
         with:
           fetch-depth: 0
           token: ${{ secrets.GITHUB_TOKEN }}
@@ -44,7 +44,7 @@ jobs:
           cargo clippy --workspace -- -D warnings
           cargo nextest run --workspace
 
-      - uses: cocogitto/cocogitto-action@v3
+      - uses: cocogitto/cocogitto-action@v4
 
       - name: Configure git
         run: |
