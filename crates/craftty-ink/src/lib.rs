@@ -3,6 +3,9 @@
 #![forbid(unsafe_code)]
 #![warn(missing_docs)]
 
+pub mod color;
+pub mod error;
+
 /// Returns the crate version.
 pub fn version() -> &'static str {
     env!("CARGO_PKG_VERSION")
