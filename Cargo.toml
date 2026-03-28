@@ -11,7 +11,7 @@ repository = "https://github.com/hvpaiva/craftty"
 
 [workspace.dependencies]
 owo-colors = { version = "4.3.0", features = ["supports-colors"] }
-terminal_size = "0.4.3"
+terminal_size = "0.4.4"
 textwrap = "0.16.2"
 unicode-width = "0.2.2"
 craftty-ink = { version = "0.1.0", path = "crates/craftty-ink" }
